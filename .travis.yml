@@ -1,8 +1,6 @@
 language: ruby
-dist: trusty
-sudo: required
 cache: bundler
-bundler_args: --without sql benchmarks console tools
+bundler_args: --without benchmarks console tools
 script: "bundle exec rake ci"
 after_success:
   - '[ "${TRAVIS_JOB_NUMBER#*.}" = "1" ] && [ "$TRAVIS_BRANCH" = "master" ] && bundle exec codeclimate-test-reporter'
