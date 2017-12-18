@@ -1,1 +1,4 @@
-require 'dry/events/bus'
+module Dry
+  module Events
+  end
+end
