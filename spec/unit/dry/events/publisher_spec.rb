@@ -51,4 +51,19 @@ RSpec.describe Dry::Events::Publisher do
       expect(result).to eql([true])
     end
   end
+
+  describe '#process' do
+    it 'yields event and its listeners' do
+      result = []
+      listener = -> event { result << event.id }
+
+      publisher.subscribe(:test_event, &listener)
+
+      publisher.process(:test_event) do |event, listener|
+        listener.(event)
+      end
+
+      expect(result).to eql([:test_event])
+    end
+  end
 end
