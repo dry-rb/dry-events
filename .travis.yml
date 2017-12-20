@@ -7,7 +7,7 @@ after_success:
 rvm:
   - 2.4.2
   - 2.3
-  - jruby
+  - jruby-9.1.10.0
 env:
   global:
     - COVERAGE='true'
