@@ -19,12 +19,6 @@ module Dry
         @__registry__ ||= Concurrent::Map.new
       end
 
-      # @api private
-      def self.included(klass)
-        klass.include(new(klass.name))
-        super
-      end
-
       attr_reader :id
 
       def self.[](id)
