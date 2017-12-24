@@ -18,4 +18,8 @@ Dir[SPEC_ROOT.join('support/**/*.rb')].each(&method(:require))
 
 RSpec.configure do |config|
   config.disable_monkey_patching!
+
+  config.after(:example) do
+    Dry::Events::Publisher.instance_variable_set(:@__registry__, Concurrent::Map.new)
+  end
 end
