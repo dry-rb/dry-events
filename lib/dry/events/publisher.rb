@@ -59,7 +59,7 @@ module Dry
 
         # @api private
         def new_bus
-          Bus.new(name, events: events.dup, listeners: listeners.dup)
+          Bus.new(events: events.dup, listeners: listeners.dup)
         end
 
         # @api private

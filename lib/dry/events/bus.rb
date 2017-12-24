@@ -8,10 +8,6 @@ module Dry
     #
     # @api private
     class Bus
-      # @!attribute [r] id
-      #   @return [Symbol] The bus identifier
-      attr_reader :id
-
       # @!attribute [r] events
       #   @return [Hash] A hash with events registered within a bus
       attr_reader :events
@@ -27,8 +23,7 @@ module Dry
       # @param [Hash] listeners A hash with listeners
       #
       # @api private
-      def initialize(id, events: EMPTY_HASH, listeners: LISTENERS_HASH.dup)
-        @id = id
+      def initialize(events: EMPTY_HASH, listeners: LISTENERS_HASH.dup)
         @listeners = listeners
         @events = events
       end
