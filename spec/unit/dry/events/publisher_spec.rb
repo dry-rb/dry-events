@@ -9,6 +9,28 @@ RSpec.describe Dry::Events::Publisher do
     }.new
   end
 
+  describe '.[]' do
+    it 'creates a publisher extension with provided id' do
+      publisher = Class.new do
+        include Dry::Events::Publisher[:my_publisher]
+      end
+
+      expect(Dry::Events::Publisher.registry[:my_publisher]).to be(publisher)
+    end
+
+    it 'does not allow same id to be used for than once' do
+      create_publisher = -> do
+        Class.new do
+          include Dry::Events::Publisher[:my_publisher]
+        end
+      end
+
+      create_publisher.()
+
+      expect { create_publisher.() }.to raise_error(Dry::Events::PublisherAlreadyRegisteredError, /my_publisher/)
+    end
+  end
+
   describe '.subscribe' do
     it 'subscribes a listener at class level' do
       listener = -> * { }

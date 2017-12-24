@@ -8,6 +8,16 @@ require 'dry/events/bus'
 
 module Dry
   module Events
+    # Exception raised when the same publisher is registered more than once
+    #
+    # @api public
+    PublisherAlreadyRegisteredError = Class.new(StandardError) do
+      # @api private
+      def initialize(id)
+        super("publisher with id #{id.inspect} already registered as: #{Publisher.registry[id]}")
+      end
+    end
+
     # Extension used for classes that can trigger events
     #
     # @api public
@@ -22,6 +32,7 @@ module Dry
       attr_reader :id
 
       def self.[](id)
+        raise PublisherAlreadyRegisteredError.new(id) if registry.key?(id)
         new(id)
       end
 
