@@ -1,4 +1,1 @@
-module Dry
-  module Events
-  end
-end
+require 'dry/events/publisher'
