@@ -41,6 +41,16 @@ RSpec.describe Dry::Events::Publisher do
     end
   end
 
+  describe '#register_event' do
+    it 'registers a new event at instance level' do
+      listener = -> * { }
+
+      publisher.register_event(:test_another_event).subscribe(:test_another_event, &listener)
+
+      expect(publisher.subscribed?(listener)).to be(true)
+    end
+  end
+
   describe '#subscribe' do
     it 'subscribes a listener' do
       listener = -> * { }

@@ -104,12 +104,12 @@ module Dry
       module ClassMethods
         # Register an event
         #
-        # @param [String] id A unique event key
-        # @param [Hash] payload Default payload
+        # @param [String] event_id The event identifier
+        # @param [Hash] payload Optional default payload
         #
         # @api public
-        def register_event(id, payload = EMPTY_HASH)
-          events[id] = Event.new(id, payload)
+        def register_event(event_id, payload = EMPTY_HASH)
+          events[event_id] = Event.new(event_id, payload)
           self
         end
 
@@ -154,6 +154,18 @@ module Dry
       #
       # @api public
       module InstanceMethods
+        # Register a new event type at instance level
+        #
+        # @param [Symbol,String] event_id The event identifier
+        # @param [Hash] payload Optional default payload
+        #
+        # @return [self]
+        #
+        # @api public
+        def register_event(event_id, payload = EMPTY_HASH)
+          __bus__.events[event_id] = Event.new(event_id, payload)
+          self
+        end
         # Publish an event
         #
         # @param [String] event_id The event identifier
