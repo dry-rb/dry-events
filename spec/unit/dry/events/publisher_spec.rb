@@ -52,12 +52,36 @@ RSpec.describe Dry::Events::Publisher do
   end
 
   describe '#subscribe' do
-    it 'subscribes a listener' do
+    it 'subscribes a listener function' do
       listener = -> * { }
 
       publisher.subscribe(:test_event, &listener)
 
       expect(publisher.subscribed?(listener)).to be(true)
+    end
+
+    it 'subscribes a listener object' do
+      listener = Class.new do
+        attr_reader :captured
+
+        def initialize
+          @captured = []
+        end
+
+        def on_test_event(event)
+          captured << event[:message]
+        end
+      end.new
+
+      publisher.subscribe(listener).publish(:test_event, message: 'it works')
+
+      expect(listener.captured).to eql(['it works'])
+
+      publisher.unsubscribe(listener)
+
+      publisher.publish(:test_event, message: 'it works')
+
+      expect(listener.captured).to eql(['it works'])
     end
   end
 

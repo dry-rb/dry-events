@@ -182,15 +182,30 @@ module Dry
         #
         # If the query parameter is provided, filters events by payload.
         #
-        # @param [String] event_id The event key
+        # @param [Symbol,String,Object] object_or_event_id The event identifier or a listener object
         # @param [Hash] query An optional event filter
-        # @yield [block] The callback
+        #
         # @return [Object] self
         #
         # @api public
-        def subscribe(event_id, query = EMPTY_HASH, &block)
-          __bus__.subscribe(event_id, query, &block)
+        def subscribe(object_or_event_id, query = EMPTY_HASH, &block)
+          if block
+            __bus__.subscribe(object_or_event_id, query, &block)
+          else
+            __bus__.attach(object_or_event_id, query)
+          end
           self
+        end
+
+        # Unsubscribe a listener
+        #
+        # @param [Object] listener The listener object
+        #
+        # @return [self]
+        #
+        # @api public
+        def unsubscribe(listener)
+          __bus__.detach(listener)
         end
 
         # Return true if a given listener has been subscribed to any event

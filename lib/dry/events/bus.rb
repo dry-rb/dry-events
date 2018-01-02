@@ -47,6 +47,27 @@ module Dry
       end
 
       # @api private
+      def attach(listener, query)
+        events.each do |id, event|
+          meth = event.listener_method
+
+          if listener.respond_to?(meth)
+            listeners[id] << [listener.method(meth), query]
+          end
+        end
+      end
+
+      # @api private
+      def detach(listener)
+        listeners.each do |id, memo|
+          memo.each do |tuple|
+            current_listener, _ = tuple
+            listeners[id].delete(tuple) if current_listener.receiver.equal?(listener)
+          end
+        end
+      end
+
+      # @api private
       def subscribe(event_id, query, &block)
         listeners[event_id] << [block, query]
         self

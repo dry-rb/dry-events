@@ -9,6 +9,9 @@ module Dry
     class Event
       include Dry::Equalizer(:id, :payload)
 
+      DOT = '.'.freeze
+      UNDERSCORE = '_'.freeze
+
       # @!attribute [r] id
       #   @return [Symbol] The event identifier
       attr_reader :id
@@ -66,6 +69,11 @@ module Dry
       # @api private
       def trigger?(query)
         query.empty? || query.all? { |key, value| payload[key] == value }
+      end
+
+      # @api private
+      def listener_method
+        @listener_method ||= :"on_#{id.to_s.gsub(DOT, UNDERSCORE)}"
       end
     end
   end
