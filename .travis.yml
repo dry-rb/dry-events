@@ -2,6 +2,7 @@ language: ruby
 cache: bundler
 bundler_args: --without benchmarks console tools
 script: "bundle exec rake ci"
+before_install: gem update --system
 after_success:
   - '[ "${TRAVIS_JOB_NUMBER#*.}" = "1" ] && [ "$TRAVIS_BRANCH" = "master" ] && bundle exec codeclimate-test-reporter'
 rvm:
