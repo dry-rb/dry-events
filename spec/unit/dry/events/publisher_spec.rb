@@ -62,7 +62,7 @@ RSpec.describe Dry::Events::Publisher do
   end
 
   describe '#publish' do
-    it 'publishs an event' do
+    it 'publishes an event' do
       result = []
       listener = -> event { result << event[:message] }
 
@@ -71,7 +71,7 @@ RSpec.describe Dry::Events::Publisher do
       expect(result).to eql(['it works'])
     end
 
-    it 'publishs an event filtered by a query' do
+    it 'publishes an event filtered by a query' do
       result = []
       listener = -> test: { result << test }
 
