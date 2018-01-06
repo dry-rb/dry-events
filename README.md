@@ -16,11 +16,11 @@
 
 Standalone pub/sub system.
 
-## Synopsis
+## Links
 
-``` ruby
-```
+* [User docs](http://dry-rb.org/gems/dry-events)
+* [API docs](http://rubydoc.info/gems/dry-events)
 
-## License
+## LICENSE
 
 See `LICENSE` file.
