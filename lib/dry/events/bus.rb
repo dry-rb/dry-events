@@ -29,7 +29,7 @@ module Dry
       end
 
       # @api private
-      def process(event_id, payload, &block)
+      def process(event_id, payload)
         listeners[event_id].each do |(listener, query)|
           event = events[event_id].payload(payload)
 
