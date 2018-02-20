@@ -18,7 +18,6 @@ module Dry
 
       # Initialize a new event bus
       #
-      # @param [Symbol] id The bus identifier
       # @param [Hash] events A hash with events
       # @param [Hash] listeners A hash with listeners
       #
