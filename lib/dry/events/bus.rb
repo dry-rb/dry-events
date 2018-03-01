@@ -76,6 +76,11 @@ module Dry
       def subscribed?(listener)
         listeners.values.any? { |value| value.any? { |(block, _)| block.equal?(listener) } }
       end
+
+      # @api private
+      def register_event?(event_id)
+        events.keys.any? { |value| value == event_id }
+      end
     end
   end
 end

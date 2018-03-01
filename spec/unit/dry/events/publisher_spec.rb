@@ -39,6 +39,14 @@ RSpec.describe Dry::Events::Publisher do
 
       expect(publisher.subscribed?(listener)).to be(true)
     end
+
+    it 'raises an exception when subscribing to an unregister event' do
+      listener = -> * { }
+
+      expect {
+        publisher.subscribe(:not_register, &listener)
+      }.to raise_error(Dry::Events::UnregisterEventError, /not_register/)
+    end
   end
 
   describe '#register_event' do

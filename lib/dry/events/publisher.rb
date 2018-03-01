@@ -18,6 +18,14 @@ module Dry
       end
     end
 
+    # @api public
+    UnregisterEventError = Class.new(StandardError) do
+      # @api private
+      def initialize(event_id)
+        super("you are trying to subscribe to an event: #{event_id} that has not been register")
+      end
+    end
+
     # Extension used for classes that can publish events
     #
     # @example
@@ -189,6 +197,7 @@ module Dry
         #
         # @api public
         def subscribe(object_or_event_id, query = EMPTY_HASH, &block)
+          raise UnregisterEventError, object_or_event_id unless registered_event?(object_or_event_id)
           if block
             __bus__.subscribe(object_or_event_id, query, &block)
           else
@@ -235,6 +244,20 @@ module Dry
         # @api private
         def __bus__
           @__bus__ ||= self.class.new_bus
+        end
+
+        # Utility method that check that the event has been registered
+        #
+        # @return [Boolean]
+        #
+        # @api private
+        def registered_event?(object_or_event_id)
+          case object_or_event_id
+          when String, Symbol
+            __bus__.register_event?(object_or_event_id)
+          else
+            true
+          end
         end
       end
     end
