@@ -45,7 +45,7 @@ RSpec.describe Dry::Events::Publisher do
 
       expect {
         publisher.subscribe(:not_register, &listener)
-      }.to raise_error(Dry::Events::UnregisterEventError, /not_register/)
+      }.to raise_error(Dry::Events::NoEventRegisteredError, /not_register/)
     end
   end
 

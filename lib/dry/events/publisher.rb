@@ -19,10 +19,10 @@ module Dry
     end
 
     # @api public
-    UnregisterEventError = Class.new(StandardError) do
+    NoEventRegisteredError = Class.new(StandardError) do
       # @api private
       def initialize(event_id)
-        super("you are trying to subscribe to an event: #{event_id} that has not been register")
+        super("you are trying to subscribe to an event: #{event_id} that has not been registered")
       end
     end
 
@@ -197,7 +197,7 @@ module Dry
         #
         # @api public
         def subscribe(object_or_event_id, query = EMPTY_HASH, &block)
-          raise UnregisterEventError, object_or_event_id unless event_registered?(object_or_event_id)
+          raise NoEventRegisteredError, object_or_event_id unless event_registered?(object_or_event_id)
           if block
             __bus__.subscribe(object_or_event_id, query, &block)
           else
