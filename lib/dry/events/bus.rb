@@ -78,7 +78,7 @@ module Dry
       end
 
       # @api private
-      def register_event?(event_id)
+      def event_registered?(event_id)
         events.keys.any? { |value| value == event_id }
       end
     end

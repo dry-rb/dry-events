@@ -197,7 +197,7 @@ module Dry
         #
         # @api public
         def subscribe(object_or_event_id, query = EMPTY_HASH, &block)
-          raise UnregisterEventError, object_or_event_id unless registered_event?(object_or_event_id)
+          raise UnregisterEventError, object_or_event_id unless event_registered?(object_or_event_id)
           if block
             __bus__.subscribe(object_or_event_id, query, &block)
           else
@@ -251,10 +251,10 @@ module Dry
         # @return [Boolean]
         #
         # @api private
-        def registered_event?(object_or_event_id)
+        def event_registered?(object_or_event_id)
           case object_or_event_id
           when String, Symbol
-            __bus__.register_event?(object_or_event_id)
+            __bus__.event_registered?(object_or_event_id)
           else
             true
           end
