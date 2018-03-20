@@ -79,7 +79,7 @@ module Dry
 
       # @api private
       def event_registered?(event_id)
-        events.key?(event_id)
+        !events[event_id].nil?
       end
     end
   end
