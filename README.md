@@ -1,6 +1,5 @@
 [gem]: https://rubygems.org/gems/dry-events
 [travis]: https://travis-ci.org/dry-rb/dry-events
-[gemnasium]: https://gemnasium.com/dry-rb/dry-events
 [codeclimate]: https://codeclimate.com/github/dry-rb/dry-events
 [coveralls]: https://coveralls.io/r/dry-rb/dry-events
 [inchpages]: http://inch-ci.org/github/dry-rb/dry-events
@@ -9,7 +8,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/dry-events.svg)][gem]
 [![Build Status](https://travis-ci.org/dry-rb/dry-events.svg?branch=master)][travis]
-[![Dependency Status](https://gemnasium.com/dry-rb/dry-events.svg)][gemnasium]
 [![Code Climate](https://codeclimate.com/github/dry-rb/dry-events/badges/gpa.svg)][codeclimate]
 [![Test Coverage](https://codeclimate.com/github/dry-rb/dry-events/badges/coverage.svg)][codeclimate]
 [![Inline docs](http://inch-ci.org/github/dry-rb/dry-events.svg?branch=master)][inchpages]
