@@ -24,13 +24,13 @@ RSpec.describe Dry::Events::Event do
 
     it 'raises KeyError when no key found' do
       expect { event[:fake] }.to raise_error(KeyError)
-    end 
+    end
   end
 
   describe '#payload' do
     let(:event_id) { :test }
     let(:payload) { {test: :foo} }
-    
+
     it 'returns payload if no argument' do
       expect(event.payload).to eq payload
     end
@@ -45,7 +45,7 @@ RSpec.describe Dry::Events::Event do
   describe '#to_h' do
     let(:event_id) { :test }
     let(:payload) { {test: :foo} }
-    
+
     it 'returns payload' do
       expect(event.to_h).to eq payload
     end
@@ -54,7 +54,7 @@ RSpec.describe Dry::Events::Event do
   describe '#trigger?' do
     let(:event_id) { :test }
     let(:payload) { {test: :foo} }
-    
+
     it 'returns true if empty query' do
       expect(event.trigger?({})).to eq true
     end
@@ -70,12 +70,12 @@ RSpec.describe Dry::Events::Event do
 
   describe '#listener_method' do
     let(:event_id) { :test }
-    
+
     it 'returns listener method name' do
       expect(event.listener_method).to eq :on_test
     end
 
-    it 'replace dots for underscore' do
+    it 'replaces dots for underscores' do
       ev = Dry::Events::Event.new('hello.world')
       expect(ev.listener_method).to eq :on_hello_world
     end

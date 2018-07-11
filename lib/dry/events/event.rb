@@ -32,7 +32,7 @@ module Dry
       # Initialize a new event
       #
       # @param [Symbol, String] id The event identifier
-      # @param [Hash] payload Optional payload
+      # @param [Hash] payload
       #
       # @return [Event]
       #

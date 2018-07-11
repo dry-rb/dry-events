@@ -22,7 +22,7 @@ module Dry
     NoEventRegisteredError = Class.new(StandardError) do
       # @api private
       def initialize(event_id)
-        super("you are trying to subscribe to an event: #{event_id} that has not been registered")
+        super("you are trying to subscribe to an event: `#{event_id}` that has not been registered")
       end
     end
 
