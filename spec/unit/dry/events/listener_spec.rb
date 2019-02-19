@@ -56,6 +56,25 @@ RSpec.describe Dry::Events::Listener do
 
         expect(captured).to eql([logger: { level: :info, output: :stdin }])
       end
+
+      it 'filters events by inclusion' do
+        listener = self.listener
+
+        listener.subscribe(:test_event, logger: { level: %i(info warn error fatal) }) do |event|
+          captured << event.payload
+        end
+
+        publisher.publish(:test_event)
+        publisher.publish(:test_event, logger: { level: :info, output: :stdin })
+        publisher.publish(:test_event, logger: { level: :fatal })
+        publisher.publish(:test_event, logger: { level: :debug })
+        publisher.publish(:test_event, logger: :debug)
+
+        expect(captured).to eql([
+          { logger: { level: :info, output: :stdin } },
+          { logger: { level: :fatal } }
+        ])
+      end
     end
   end
 end

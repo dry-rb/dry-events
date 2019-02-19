@@ -1,3 +1,5 @@
+require 'set'
+
 module Dry
   module Events
     class Filter
@@ -16,23 +18,26 @@ module Dry
       def build_checks(hash, keys = [])
         hash.each_with_object([]) do |(key, value), checks|
           path = [*keys, key]
+          values = Array(value).to_set
 
           if value.is_a?(Hash)
-            checks.concat(build_checks(value, path))
+            checks.concat(build_checks(values, path))
           else
-            checks << method(:compare).curry.(path, value)
+            checks << method(:compare).curry.(path, values)
           end
         end
       end
 
-      def compare(path, value, payload)
-        value == path.reduce(payload) do |acc, key|
-          if acc.is_a?(Hash)
-            acc.fetch(key, NO_MATCH)
+      def compare(path, values, payload)
+        value = path.reduce(payload) do |acc, key|
+          if acc.is_a?(Hash) && acc.key?(key)
+            acc[key]
           else
-            NO_MATCH
+            break NO_MATCH
           end
         end
+
+        values.include?(value)
       end
     end
   end
