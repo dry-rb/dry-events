@@ -11,20 +11,17 @@ module Dry
         @checks = build_checks(filter)
       end
 
-      def call(payload)
+      def call(payload = EMPTY_HASH)
         checks.all? { |check| check.(payload) }
       end
 
-      def build_checks(hash, keys = [])
-        hash.each_with_object([]) do |(key, value), checks|
-          path = [*keys, key]
-
-          if value.is_a?(Hash)
-            checks.concat(build_checks(value, path))
-          else
-            predicate = predicate(value)
-            checks << method(:compare).curry.(path, predicate)
+      def build_checks(filter, checks = EMPTY_ARRAY, keys = EMPTY_ARRAY)
+        if filter.is_a?(Hash)
+          filter.reduce(checks) do |cs, (key, value)|
+            build_checks(value, cs, [*keys, key])
           end
+        else
+          [*checks, method(:compare).curry.(keys, predicate(filter))]
         end
       end
 

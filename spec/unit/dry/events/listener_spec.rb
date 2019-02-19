@@ -15,7 +15,6 @@ RSpec.describe Dry::Events::Listener do
     }.new
   end
 
-
   describe '.subscribe' do
     let(:captured) { [] }
 
@@ -40,60 +39,6 @@ RSpec.describe Dry::Events::Listener do
         publisher.publish(:test_event, level: :info)
 
         expect(captured).to eql([level: :info])
-      end
-
-      it 'filters events using nested query' do
-        listener = self.listener
-
-        listener.subscribe(:test_event, logger: { level: :info }) do |event|
-          captured << event.payload
-        end
-
-        publisher.publish(:test_event)
-        publisher.publish(:test_event, logger: { level: :info, output: :stdin })
-        publisher.publish(:test_event, logger: { level: :debug })
-        publisher.publish(:test_event, logger: :debug)
-
-        expect(captured).to eql([logger: { level: :info, output: :stdin }])
-      end
-
-      it 'filters events by inclusion' do
-        listener = self.listener
-
-        listener.subscribe(:test_event, logger: { level: %i(info warn error fatal) }) do |event|
-          captured << event.payload
-        end
-
-        publisher.publish(:test_event)
-        publisher.publish(:test_event, logger: { level: :info, output: :stdin })
-        publisher.publish(:test_event, logger: { level: :fatal })
-        publisher.publish(:test_event, logger: { level: :debug })
-        publisher.publish(:test_event, logger: :debug)
-
-        expect(captured).to eql([
-          { logger: { level: :info, output: :stdin } },
-          { logger: { level: :fatal } }
-        ])
-      end
-
-      it 'filters by proc' do
-        listener = self.listener
-        predicate = -> level { %i(info warn error fatal).include?(level) }
-
-        listener.subscribe(:test_event, logger: { level: predicate }) do |event|
-          captured << event.payload
-        end
-
-        publisher.publish(:test_event)
-        publisher.publish(:test_event, logger: { level: :info, output: :stdin })
-        publisher.publish(:test_event, logger: { level: :fatal })
-        publisher.publish(:test_event, logger: { level: :debug })
-        publisher.publish(:test_event, logger: :debug)
-
-        expect(captured).to eql([
-          { logger: { level: :info, output: :stdin } },
-          { logger: { level: :fatal } }
-        ])
       end
     end
   end
