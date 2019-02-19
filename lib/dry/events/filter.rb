@@ -18,17 +18,17 @@ module Dry
       def build_checks(hash, keys = [])
         hash.each_with_object([]) do |(key, value), checks|
           path = [*keys, key]
-          values = Array(value).to_set
 
           if value.is_a?(Hash)
-            checks.concat(build_checks(values, path))
+            checks.concat(build_checks(value, path))
           else
-            checks << method(:compare).curry.(path, values)
+            predicate = predicate(value)
+            checks << method(:compare).curry.(path, predicate)
           end
         end
       end
 
-      def compare(path, values, payload)
+      def compare(path, predicate, payload)
         value = path.reduce(payload) do |acc, key|
           if acc.is_a?(Hash) && acc.key?(key)
             acc[key]
@@ -37,7 +37,15 @@ module Dry
           end
         end
 
-        values.include?(value)
+        predicate.(value)
+      end
+
+      def predicate(value)
+        case value
+        when Proc then value
+        when Array then value.method(:include?)
+        else value.method(:==)
+        end
       end
     end
   end
