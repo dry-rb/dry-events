@@ -29,10 +29,10 @@ module Dry
 
       # @api private
       def process(event_id, payload)
-        listeners[event_id].each do |(listener, query)|
+        listeners[event_id].each do |listener, filter|
           event = events[event_id].payload(payload)
 
-          if event.trigger?(query)
+          if filter.(payload)
             yield(event, listener)
           end
         end
@@ -46,12 +46,12 @@ module Dry
       end
 
       # @api private
-      def attach(listener, query)
+      def attach(listener, filter)
         events.each do |id, event|
           meth = event.listener_method
 
           if listener.respond_to?(meth)
-            listeners[id] << [listener.method(meth), query]
+            listeners[id] << [listener.method(meth), filter]
           end
         end
       end
@@ -67,14 +67,14 @@ module Dry
       end
 
       # @api private
-      def subscribe(event_id, query, &block)
-        listeners[event_id] << [block, query]
+      def subscribe(event_id, filter, &block)
+        listeners[event_id] << [block, filter]
         self
       end
 
       # @api private
       def subscribed?(listener)
-        listeners.values.any? { |value| value.any? { |(block, _)| block.equal?(listener) } }
+        listeners.values.any? { |value| value.any? { |block, _| block.equal?(listener) } }
       end
     end
   end

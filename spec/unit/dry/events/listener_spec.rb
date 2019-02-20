@@ -16,16 +16,30 @@ RSpec.describe Dry::Events::Listener do
   end
 
   describe '.subscribe' do
-    it 'subscribes a listener at class level' do
-      result = []
+    let(:captured) { [] }
 
+    it 'subscribes a listener at class level' do
       listener.subscribe(:test_event) do |event|
-        result << event.id
+        captured << event.id
       end
 
       publisher.publish(:test_event)
 
-      expect(result).to eql([:test_event])
+      expect(captured).to eql([:test_event])
+    end
+
+    describe 'filters' do
+      it 'filters events' do
+        listener.subscribe(:test_event, level: :info) do |event|
+          captured << event.payload
+        end
+
+        publisher.publish(:test_event)
+        publisher.publish(:test_event, level: :debug)
+        publisher.publish(:test_event, level: :info)
+
+        expect(captured).to eql([level: :info])
+      end
     end
   end
 end

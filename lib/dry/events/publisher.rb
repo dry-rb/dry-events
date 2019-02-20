@@ -5,6 +5,7 @@ require 'dry/core/class_attributes'
 require 'dry/events/constants'
 require 'dry/events/event'
 require 'dry/events/bus'
+require 'dry/events/filter'
 
 module Dry
   module Events
@@ -116,13 +117,13 @@ module Dry
         # Subscribe to an event
         #
         # @param [Symbol,String] event_id The event identifier
-        # @param [Hash] query An optional query for conditional listeners
+        # @param [Hash] filter_hash An optional filter for conditional listeners
         #
         # @return [Class] publisher class
         #
         # @api public
-        def subscribe(event_id, query = EMPTY_HASH, &block)
-          listeners[event_id] << [block, query]
+        def subscribe(event_id, filter_hash = EMPTY_HASH, &block)
+          listeners[event_id] << [block, Filter.new(filter_hash)]
           self
         end
 
@@ -180,19 +181,21 @@ module Dry
 
         # Subscribe to events.
         #
-        # If the query parameter is provided, filters events by payload.
+        # If the filter parameter is provided, filters events by payload.
         #
         # @param [Symbol,String,Object] object_or_event_id The event identifier or a listener object
-        # @param [Hash] query An optional event filter
+        # @param [Hash] filter_hash An optional event filter
         #
         # @return [Object] self
         #
         # @api public
-        def subscribe(object_or_event_id, query = EMPTY_HASH, &block)
+        def subscribe(object_or_event_id, filter_hash = EMPTY_HASH, &block)
+          filter = Filter.new(filter_hash)
+
           if block
-            __bus__.subscribe(object_or_event_id, query, &block)
+            __bus__.subscribe(object_or_event_id, filter, &block)
           else
-            __bus__.attach(object_or_event_id, query)
+            __bus__.attach(object_or_event_id, filter)
           end
           self
         end
@@ -217,7 +220,7 @@ module Dry
 
         # Utility method which yields event with each of its listeners
         #
-        # Listeners are already filtered out when query was provided during
+        # Listeners are already filtered out when filter was provided during
         # subscription
         #
         # @param [Symbol,String] event_id The event identifier
