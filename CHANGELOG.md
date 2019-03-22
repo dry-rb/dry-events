@@ -1,4 +1,4 @@
-# to-be-released
+# v0.1.1 to-be-released
 
 ## Added
 
@@ -25,8 +25,8 @@
   # here acts as array inclusion example
   subscribe(:event, logger: { level: -> level { %i(info warn error).include?(level) })
   ```
-  
-[Compare v0.1.0...master](https://github.com/dry-rb/dry-events/compare/v0.1.0...master)
+
+[Compare v0.1.0...v0.1.1](https://github.com/dry-rb/dry-events/compare/v0.1.0...v0.1.1)
 
 # v0.1.0 2018-01-02
 
