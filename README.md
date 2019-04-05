@@ -1,10 +1,10 @@
 [gem]: https://rubygems.org/gems/dry-events
 [travis]: https://travis-ci.org/dry-rb/dry-events
 [codeclimate]: https://codeclimate.com/github/dry-rb/dry-events
-[coveralls]: https://coveralls.io/r/dry-rb/dry-events
+[chat]: https://dry-rb.zulipchat.com
 [inchpages]: http://inch-ci.org/github/dry-rb/dry-events
 
-# dry-events [![Join the chat at https://gitter.im/dry-rb/chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dry-rb/chat)
+# dry-events [![Join the chat at https://dry-rb.zulipchat.com](https://img.shields.io/badge/dry--rb-join%20chat-%23346b7a.svg)][chat]
 
 [![Gem Version](https://badge.fury.io/rb/dry-events.svg)][gem]
 [![Build Status](https://travis-ci.org/dry-rb/dry-events.svg?branch=master)][travis]
