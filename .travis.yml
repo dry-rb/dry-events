@@ -6,10 +6,14 @@ before_install: gem update --system
 after_success:
   - '[ "${TRAVIS_JOB_NUMBER#*.}" = "1" ] && [ "$TRAVIS_BRANCH" = "master" ] && bundle exec codeclimate-test-reporter'
 rvm:
-  - 2.5.0
-  - 2.4.3
-  - 2.3.6
-  - jruby-9.1.9.0
+  - 2.6.3
+  - 2.5.5
+  - 2.4.6
+  - jruby-9.2.7.0
+  - truffleruby
+matrix:
+  allow_failures:
+    - rvm: truffleruby
 env:
   global:
     - COVERAGE='true'

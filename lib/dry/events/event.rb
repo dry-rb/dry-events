@@ -25,8 +25,9 @@ module Dry
 
       # @api private
       def self.new(id, payload = EMPTY_HASH)
-        raise InvalidEventNameError.new if id.nil?
-        super(id, payload)
+        return super(id, payload) if (id.is_a?(String) || id.is_a?(Symbol)) && !id.empty?
+
+        raise InvalidEventNameError.new
       end
 
       # Initialize a new event
@@ -77,11 +78,6 @@ module Dry
         else
           @payload
         end
-      end
-
-      # @api private
-      def trigger?(query)
-        query.empty? || query.all? { |key, value| payload[key] == value }
       end
 
       # @api private

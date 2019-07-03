@@ -51,23 +51,6 @@ RSpec.describe Dry::Events::Event do
     end
   end
 
-  describe '#trigger?' do
-    let(:event_id) { :test }
-    let(:payload) { {test: :foo} }
-
-    it 'returns true if empty query' do
-      expect(event.trigger?({})).to eq true
-    end
-
-    it 'returns true if payload has all key value' do
-      expect(event.trigger?({ test: :foo })).to eq true
-    end
-
-    it 'returns false if payload does not match all key value' do
-      expect(event.trigger?({ test: :foo, bar: :baz })).to eq false
-    end
-  end
-
   describe '#listener_method' do
     let(:event_id) { :test }
 

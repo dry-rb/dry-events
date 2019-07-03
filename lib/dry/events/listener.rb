@@ -11,7 +11,7 @@ module Dry
     #
     #     register_event("users.created")
     #   end
-
+    #
     #   class MyListener
     #     include Dry::Events::Listener[:app]
     #
