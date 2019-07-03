@@ -1,3 +1,9 @@
+# Unreleased
+
+## Added
+
+- Raise an error upon subscribing to a non-existing event_id or with an object that will never be called (GustavoCaso, mensfeld and davydovanton)
+
 # v0.1.1 2019-03-22
 
 ## Added
