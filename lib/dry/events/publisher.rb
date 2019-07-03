@@ -20,10 +20,15 @@ module Dry
     end
 
     # @api public
-    NoEventRegisteredError = Class.new(StandardError) do
+    InvalidSubscriberError = Class.new(StandardError) do
       # @api private
-      def initialize(event_id)
-        super("you are trying to subscribe to an event: `#{event_id}` that has not been registered")
+      def initialize(object_or_event_id)
+        case object_or_event_id
+        when String, Symbol
+          super("you are trying to subscribe to an event: `#{object_or_event_id}` that has not been registered")
+        else
+          super("you try use subscriber object that will never be executed")
+        end
       end
     end
 
@@ -198,15 +203,19 @@ module Dry
         #
         # @api public
         def subscribe(object_or_event_id, filter_hash = EMPTY_HASH, &block)
-          raise NoEventRegisteredError, object_or_event_id unless event_registered?(object_or_event_id)
-          filter = Filter.new(filter_hash)
+          if __bus__.can_handle?(object_or_event_id)
+            filter = Filter.new(filter_hash)
 
-          if block
-            __bus__.subscribe(object_or_event_id, filter, &block)
+            if block
+              __bus__.subscribe(object_or_event_id, filter, &block)
+            else
+              __bus__.attach(object_or_event_id, filter)
+            end
+
+            self
           else
-            __bus__.attach(object_or_event_id, filter)
+            raise InvalidSubscriberError, object_or_event_id
           end
-          self
         end
 
         # Unsubscribe a listener
@@ -247,20 +256,6 @@ module Dry
         # @api private
         def __bus__
           @__bus__ ||= self.class.new_bus
-        end
-
-        # Utility method that check that the event has been registered
-        #
-        # @return [Boolean]
-        #
-        # @api private
-        def event_registered?(object_or_event_id)
-          case object_or_event_id
-          when String, Symbol
-            __bus__.event_registered?(object_or_event_id)
-          else
-            true
-          end
         end
       end
     end

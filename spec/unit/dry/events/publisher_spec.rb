@@ -45,7 +45,7 @@ RSpec.describe Dry::Events::Publisher do
 
       expect {
         publisher.subscribe(:not_register, &listener)
-      }.to raise_error(Dry::Events::NoEventRegisteredError, /not_register/)
+      }.to raise_error(Dry::Events::InvalidSubscriberError, /not_register/)
     end
   end
 
@@ -90,6 +90,20 @@ RSpec.describe Dry::Events::Publisher do
       publisher.publish(:test_event, message: 'it works')
 
       expect(listener.captured).to eql(['it works'])
+    end
+
+    it 'raises an exception when subscribing with no methods to execute' do
+      listener = Object.new
+
+      expect {
+        publisher.subscribe(listener)
+      }.to raise_error(Dry::Events::InvalidSubscriberError, /never be executed/)
+    end
+
+    it 'does not raise an exception when subscriber has methods for notification' do
+      listener = Object.new
+      def listener.on_test_event; nil; end
+      expect { publisher.subscribe(listener) }.not_to raise_error
     end
   end
 

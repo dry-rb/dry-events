@@ -78,8 +78,16 @@ module Dry
       end
 
       # @api private
-      def event_registered?(event_id)
-        !events[event_id].nil?
+      def can_handle?(object_or_event_id)
+        case object_or_event_id
+        when String, Symbol
+          events.key?(object_or_event_id)
+        else
+          events
+            .values
+            .map(&:listener_method)
+            .any?(&object_or_event_id.method(:respond_to?))
+        end
       end
     end
   end
