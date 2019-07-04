@@ -9,22 +9,36 @@ module Dry
     class Event
       include Dry::Equalizer(:id, :payload)
 
+      InvalidEventNameError = Class.new(StandardError) do
+        # @api private
+        def initialize
+          super("please provide a valid event name, it could be either String or Symbol")
+        end
+      end
+
       DOT = '.'.freeze
       UNDERSCORE = '_'.freeze
 
       # @!attribute [r] id
-      #   @return [Symbol] The event identifier
+      #   @return [Symbol, String] The event identifier
       attr_reader :id
+
+      # @api private
+      def self.new(id, payload = EMPTY_HASH)
+        return super(id, payload) if (id.is_a?(String) || id.is_a?(Symbol)) && !id.empty?
+
+        raise InvalidEventNameError.new
+      end
 
       # Initialize a new event
       #
-      # @param [Symbol] id The event identifier
-      # @param [Hash] payload Optional payload
+      # @param [Symbol, String] id The event identifier
+      # @param [Hash] payload
       #
       # @return [Event]
       #
       # @api private
-      def initialize(id, payload = EMPTY_HASH)
+      def initialize(id, payload)
         @id = id
         @payload = payload
       end

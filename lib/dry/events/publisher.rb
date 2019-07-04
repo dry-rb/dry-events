@@ -19,6 +19,19 @@ module Dry
       end
     end
 
+    # @api public
+    InvalidSubscriberError = Class.new(StandardError) do
+      # @api private
+      def initialize(object_or_event_id)
+        case object_or_event_id
+        when String, Symbol
+          super("you are trying to subscribe to an event: `#{object_or_event_id}` that has not been registered")
+        else
+          super("you try use subscriber object that will never be executed")
+        end
+      end
+    end
+
     # Extension used for classes that can publish events
     #
     # @example
@@ -190,14 +203,19 @@ module Dry
         #
         # @api public
         def subscribe(object_or_event_id, filter_hash = EMPTY_HASH, &block)
-          filter = Filter.new(filter_hash)
+          if __bus__.can_handle?(object_or_event_id)
+            filter = Filter.new(filter_hash)
 
-          if block
-            __bus__.subscribe(object_or_event_id, filter, &block)
+            if block
+              __bus__.subscribe(object_or_event_id, filter, &block)
+            else
+              __bus__.attach(object_or_event_id, filter)
+            end
+
+            self
           else
-            __bus__.attach(object_or_event_id, filter)
+            raise InvalidSubscriberError, object_or_event_id
           end
-          self
         end
 
         # Unsubscribe a listener

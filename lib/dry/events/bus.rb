@@ -76,6 +76,19 @@ module Dry
       def subscribed?(listener)
         listeners.values.any? { |value| value.any? { |block, _| block.equal?(listener) } }
       end
+
+      # @api private
+      def can_handle?(object_or_event_id)
+        case object_or_event_id
+        when String, Symbol
+          events.key?(object_or_event_id)
+        else
+          events
+            .values
+            .map(&:listener_method)
+            .any?(&object_or_event_id.method(:respond_to?))
+        end
+      end
     end
   end
 end
