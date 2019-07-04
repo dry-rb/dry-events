@@ -2,7 +2,6 @@ language: ruby
 cache: bundler
 bundler_args: --without benchmarks console tools
 script: "bundle exec rake ci"
-before_install: gem update --system
 after_success:
   - '[ "${TRAVIS_JOB_NUMBER#*.}" = "1" ] && [ "$TRAVIS_BRANCH" = "master" ] && bundle exec codeclimate-test-reporter'
 rvm:
@@ -14,13 +13,12 @@ rvm:
 matrix:
   allow_failures:
     - rvm: truffleruby
+    - rvm: jruby-9.2.7.0
 env:
   global:
     - COVERAGE='true'
 notifications:
   webhooks:
-    urls:
-      - https://webhooks.gitter.im/e/19098b4253a72c9796db
     on_success: change
     on_failure: always
     on_start: false
