@@ -63,7 +63,7 @@ RSpec.describe Dry::Events::Filter do
 
   context 'top-level proc' do
     let(:query) do
-      -> level: :debug, ** { %i(error fatal).include?(level) }
+      -> ev { %i(error fatal).include?(ev.fetch(:level, :debug)) }
     end
 
     specify do

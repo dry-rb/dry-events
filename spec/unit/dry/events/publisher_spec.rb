@@ -119,7 +119,7 @@ RSpec.describe Dry::Events::Publisher do
 
     it 'publishes an event filtered by a query' do
       result = []
-      listener = -> test: { result << test }
+      listener = -> e { result << e[:test] }
 
       publisher.
         subscribe(:test_event, test: true, &listener).
