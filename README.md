@@ -1,24 +1,29 @@
 [gem]: https://rubygems.org/gems/dry-events
-[ci]: https://github.com/dry-rb/dry-events/actions?query=workflow%3Aci
-[codeclimate]: https://codeclimate.com/github/dry-rb/dry-events
+[actions]: https://github.com/dry-rb/dry-events/actions
+[codacy]: https://www.codacy.com/gh/dry-rb/dry-events
 [chat]: https://dry-rb.zulipchat.com
 [inchpages]: http://inch-ci.org/github/dry-rb/dry-events
 
 # dry-events [![Join the chat at https://dry-rb.zulipchat.com](https://img.shields.io/badge/dry--rb-join%20chat-%23346b7a.svg)][chat]
 
 [![Gem Version](https://badge.fury.io/rb/dry-events.svg)][gem]
-[![Build Status](https://github.com/dry-rb/dry-events/workflows/ci/badge.svg)][ci]
-[![Code Climate](https://codeclimate.com/github/dry-rb/dry-events/badges/gpa.svg)][codeclimate]
-[![Test Coverage](https://codeclimate.com/github/dry-rb/dry-events/badges/coverage.svg)][codeclimate]
+[![CI Status](https://github.com/dry-rb/dry-events/workflows/ci/badge.svg)][actions]
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3170162485134ea3b778c7e20e180b26)][codacy]
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/3170162485134ea3b778c7e20e180b26)][codacy]
 [![Inline docs](http://inch-ci.org/github/dry-rb/dry-events.svg?branch=master)][inchpages]
-
-Standalone pub/sub system.
 
 ## Links
 
-- [User docs](http://dry-rb.org/gems/dry-events)
-- [API docs](http://rubydoc.info/gems/dry-events)
+* [User documentation](http://dry-rb.org/gems/dry-events)
+* [API documentation](http://rubydoc.info/gems/dry-events)
 
-## LICENSE
+## Supported Ruby versions
+
+This library officially supports the following Ruby versions:
+
+* MRI >= `2.4`
+* jruby >= `9.2`
+
+## License
 
 See `LICENSE` file.
