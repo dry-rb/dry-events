@@ -14,7 +14,7 @@ module Dry
       InvalidEventNameError = Class.new(StandardError) do
         # @api private
         def initialize
-          super("please provide a valid event name, it could be either String or Symbol")
+          super('please provide a valid event name, it could be either String or Symbol')
         end
       end
 

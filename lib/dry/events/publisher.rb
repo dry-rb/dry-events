@@ -29,7 +29,7 @@ module Dry
         when String, Symbol
           super("you are trying to subscribe to an event: `#{object_or_event_id}` that has not been registered")
         else
-          super("you try use subscriber object that will never be executed")
+          super('you try use subscriber object that will never be executed')
         end
       end
     end
