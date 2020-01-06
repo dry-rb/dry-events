@@ -10,13 +10,13 @@ RSpec.describe Dry::Events::Event do
   describe 'invalid event name' do
     let(:event_id) { nil }
     it 'raises InvalidEventNameError' do
-      expect{ event }.to raise_error(Dry::Events::Event::InvalidEventNameError)
+      expect { event }.to raise_error(Dry::Events::Event::InvalidEventNameError)
     end
   end
 
   describe '#[]' do
     let(:event_id) { :test }
-    let(:payload) { {test: :foo} }
+    let(:payload) { { test: :foo } }
 
     it 'fetches payload key' do
       expect(event[:test]).to eq :foo
@@ -29,7 +29,7 @@ RSpec.describe Dry::Events::Event do
 
   describe '#payload' do
     let(:event_id) { :test }
-    let(:payload) { {test: :foo} }
+    let(:payload) { { test: :foo } }
 
     it 'returns payload if no argument' do
       expect(event.payload).to eq payload
@@ -38,13 +38,13 @@ RSpec.describe Dry::Events::Event do
     it 'returns new event with payload payload' do
       new_event = event.payload({ bar: :baz })
       expect(new_event).to_not eq event
-      expect(new_event.payload).to eq ({test: :foo, bar: :baz})
+      expect(new_event.payload).to eq ({ test: :foo, bar: :baz })
     end
   end
 
   describe '#to_h' do
     let(:event_id) { :test }
-    let(:payload) { {test: :foo} }
+    let(:payload) { { test: :foo } }
 
     it 'returns payload' do
       expect(event.to_h).to eq payload

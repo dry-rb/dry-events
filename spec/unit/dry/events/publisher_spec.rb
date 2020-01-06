@@ -33,7 +33,7 @@ RSpec.describe Dry::Events::Publisher do
 
   describe '.subscribe' do
     it 'subscribes a listener at class level' do
-      listener = -> * { }
+      listener = -> * {}
 
       publisher.class.subscribe(:test_event, &listener)
 
@@ -41,7 +41,7 @@ RSpec.describe Dry::Events::Publisher do
     end
 
     it 'raises an exception when subscribing to an unregister event' do
-      listener = -> * { }
+      listener = -> * {}
 
       expect {
         publisher.subscribe(:not_register, &listener)
@@ -51,7 +51,7 @@ RSpec.describe Dry::Events::Publisher do
 
   describe '#register_event' do
     it 'registers a new event at instance level' do
-      listener = -> * { }
+      listener = -> * {}
 
       publisher.register_event(:test_another_event).subscribe(:test_another_event, &listener)
 
@@ -61,7 +61,7 @@ RSpec.describe Dry::Events::Publisher do
 
   describe '#subscribe' do
     it 'subscribes a listener function' do
-      listener = -> * { }
+      listener = -> * {}
 
       publisher.subscribe(:test_event, &listener)
 
@@ -121,10 +121,10 @@ RSpec.describe Dry::Events::Publisher do
       result = []
       listener = -> e { result << e[:test] }
 
-      publisher.
-        subscribe(:test_event, test: true, &listener).
-        publish(:test_event, test: false).
-        publish(:test_event, test: true)
+      publisher
+        .subscribe(:test_event, test: true, &listener)
+        .publish(:test_event, test: false)
+        .publish(:test_event, test: true)
 
       expect(result).to eql([true])
     end

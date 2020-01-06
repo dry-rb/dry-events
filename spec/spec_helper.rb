@@ -4,7 +4,6 @@ begin
   require 'pry'
   require 'pry-byebug'
 rescue LoadError; end
-
 require 'dry-events'
 
 SPEC_ROOT = Pathname(__dir__)

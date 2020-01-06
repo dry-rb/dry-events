@@ -90,6 +90,7 @@ module Dry
       # @api public
       def self.[](id)
         raise PublisherAlreadyRegisteredError.new(id) if registry.key?(id)
+
         new(id)
       end
 
@@ -180,6 +181,7 @@ module Dry
           __bus__.events[event_id] = Event.new(event_id, payload)
           self
         end
+
         # Publish an event
         #
         # @param [String] event_id The event identifier
