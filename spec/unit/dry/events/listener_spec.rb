@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dry/events/listener'
 
 RSpec.describe Dry::Events::Listener do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dry/events/publisher'
 
 RSpec.describe Dry::Events::Publisher do

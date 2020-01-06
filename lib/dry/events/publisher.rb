@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'concurrent/map'
 
 require 'dry/core/class_attributes'

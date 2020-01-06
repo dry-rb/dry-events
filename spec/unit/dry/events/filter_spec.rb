@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Dry::Events::Filter do
   subject(:filter) { described_class.new(query) }
 
