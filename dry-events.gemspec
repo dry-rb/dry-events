@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "Pub/sub system"
   spec.description   = spec.summary
   spec.homepage      = 'https://dry-rb.org/gems/dry-events'
-  spec.files         = Dir['CHANGELOG.md', 'LICENSE', 'README.md', 'dry-events.gemspec', 'lib/**/*']
+  spec.files         = Dir["CHANGELOG.md", "LICENSE", "README.md", "dry-events.gemspec", "lib/**/*"]
   spec.require_paths = ['lib']
 
   spec.metadata['allowed_push_host'] = 'https://rubygems.org'
