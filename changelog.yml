@@ -1,0 +1,36 @@
+---
+- version: 0.2.0
+  date: '2019-07-24'
+  fixed:
+  - 'Trying to subscribe to a non-existant event raises an exception (issue #3) (@GustavoCaso
+    + @mensfeld)'
+- version: 0.1.1
+  date: '2019-03-22'
+  added:
+  - |-
+    Subscription filters can be more complex: nested hash inclusion, array inclusion, and proc checks were added (flash-gordon)
+      ```ruby
+      # nested hash check
+      subscribe(:event, logger: { level: :info })
+      # pass
+      trigger(:event, logger: { level: :info, output: :stdin })
+      # filtered out
+      trigger(:event, logger: { level: :debug })
+      trigger(:event, something: :else)
+
+      # array inclusion
+      subscribe(:event, logger: { level: %i(info warn error) })
+      # pass
+      trigger(:event, logger: { level: :info })
+      trigger(:event, logger: { level: :error })
+      trigger(:event, logger: { level: :info, output: :stdin })
+      # filtered out
+      trigger(:event, logger: { level: :debug })
+
+      # proc checks
+      # here acts as array inclusion example
+      subscribe(:event, logger: { level: -> level { %i(info warn error).include?(level) })
+      ```
+- version: 0.1.0
+  date: '2018-01-02'
+  summary: First public release
