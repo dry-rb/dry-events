@@ -130,6 +130,12 @@ RSpec.describe Dry::Events::Publisher do
 
       expect(result).to eql([true])
     end
+
+    it 'raises an exception when publishing an unregistered event' do
+      expect {
+        publisher.publish(:unregistered_event, {})
+      }.to raise_error(Dry::Events::UnregisteredEventError, /unregistered_event/)
+    end
   end
 
   describe '#process' do
