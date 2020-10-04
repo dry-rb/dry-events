@@ -38,9 +38,9 @@ module Dry
       def initialize(object_or_event_id)
         case object_or_event_id
         when String, Symbol
-          super("You are trying to publish an event: `#{object_or_event_id}` that has not been registered")
+          super("You are trying to publish an unregistered event: `#{object_or_event_id}`")
         else
-          super('You are trying to publish an event that has not been registered')
+          super("You are trying to publish an unregistered event")
         end
       end
     end
