@@ -1,4 +1,12 @@
 ---
+- version: unreleased
+  summary: 
+  date: 
+  fixed:
+  - 'Trying to publish an unregistered event raises a meaningful error now (issue
+    #13 fixed via #14) (@landongrindheim)'
+  added: 
+  changed: 
 - version: 0.2.0
   date: '2019-07-24'
   fixed:
