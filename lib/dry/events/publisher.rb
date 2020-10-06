@@ -34,6 +34,17 @@ module Dry
       end
     end
 
+    UnregisteredEventError = Class.new(StandardError) do
+      def initialize(object_or_event_id)
+        case object_or_event_id
+        when String, Symbol
+          super("You are trying to publish an unregistered event: `#{object_or_event_id}`")
+        else
+          super("You are trying to publish an unregistered event")
+        end
+      end
+    end
+
     # Extension used for classes that can publish events
     #
     # @example
@@ -191,8 +202,12 @@ module Dry
         #
         # @api public
         def publish(event_id, payload = EMPTY_HASH)
-          __bus__.publish(event_id, payload)
-          self
+          if __bus__.can_handle?(event_id)
+            __bus__.publish(event_id, payload)
+            self
+          else
+            raise UnregisteredEventError, event_id
+          end
         end
         alias_method :trigger, :publish
 
