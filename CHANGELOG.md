@@ -7,6 +7,9 @@
 
 - Trying to publish an unregistered event raises a meaningful error now (issue #13 fixed via #14) (@landongrindheim)
 
+### Changed
+
+- Dependency on dry-equalizer was changed to dry-core (@solnic)
 
 [Compare v0.2.0...master](https://github.com/dry-rb/dry-events/compare/v0.2.0...master)
 
