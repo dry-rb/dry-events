@@ -1,7 +1,7 @@
 ---
-- version: unreleased
+- version: 0.3.0
   summary:
-  date:
+  date: '2021-04-11'
   fixed:
   - 'Trying to publish an unregistered event raises a meaningful error now (issue
     #13 fixed via #14) (@landongrindheim)'
