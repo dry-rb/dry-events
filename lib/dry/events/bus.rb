@@ -77,9 +77,11 @@ module Dry
       # @api private
       def subscribed?(listener)
         listeners.values.any? do |value|
-          case listener
-          when Proc   then value.any? { |block, _| block.equal?(listener) }
-          when Method then value.any? { |block, _| listener.owner == block.owner && listener.name == block.name }
+          value.any? do |block, _|
+            case listener
+            when Proc   then block.equal?(listener)
+            when Method then listener.owner == block.owner && listener.name == block.name
+            end
           end
         end
       end
