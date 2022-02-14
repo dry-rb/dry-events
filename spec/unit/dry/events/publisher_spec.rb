@@ -152,4 +152,16 @@ RSpec.describe Dry::Events::Publisher do
       expect(result).to eql([:test_event])
     end
   end
+
+  describe '#subscribed?' do
+    it 'returns true when checking for previously subscribed instance methods' do
+      listener = Object.new
+      def listener.on_test_event; nil; end
+      def listener.on_another_test_event; nil; end
+      subject.register_event(:another_test_event)
+      subject.subscribe(listener)
+      expect(publisher.subscribed?(listener.method(:on_test_event))).to be(true)
+      expect(publisher.subscribed?(listener.method(:on_another_test_event))).to be(true)
+    end
+  end
 end
