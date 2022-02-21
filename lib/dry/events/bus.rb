@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'dry/events/constants'
+require "dry/events/constants"
 
 module Dry
   module Events
