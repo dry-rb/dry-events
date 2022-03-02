@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'dry/events/constants'
+require "dry/events/constants"
 
 module Dry
   module Events
@@ -76,7 +76,14 @@ module Dry
 
       # @api private
       def subscribed?(listener)
-        listeners.values.any? { |value| value.any? { |block, _| block.equal?(listener) } }
+        listeners.values.any? do |value|
+          value.any? do |block, _|
+            case listener
+            when Proc   then block.equal?(listener)
+            when Method then listener.owner == block.owner && listener.name == block.name
+            end
+          end
+        end
       end
 
       # @api private
