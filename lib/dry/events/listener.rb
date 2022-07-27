@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'dry/core/equalizer'
-require 'dry/events/publisher'
+require "dry/core/equalizer"
+require "dry/events/publisher"
 
 module Dry
   module Events

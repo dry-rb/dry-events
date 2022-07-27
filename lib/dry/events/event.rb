@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'dry/core/equalizer'
-require 'dry/events/constants'
+require "dry/core/equalizer"
+require "dry/events/constants"
 
 module Dry
   module Events
@@ -14,12 +14,12 @@ module Dry
       InvalidEventNameError = Class.new(StandardError) do
         # @api private
         def initialize
-          super('please provide a valid event name, it could be either String or Symbol')
+          super("please provide a valid event name, it could be either String or Symbol")
         end
       end
 
-      DOT = '.'.freeze
-      UNDERSCORE = '_'.freeze
+      DOT = "."
+      UNDERSCORE = "_"
 
       # @!attribute [r] id
       #   @return [Symbol, String] The event identifier
@@ -29,7 +29,7 @@ module Dry
       def self.new(id, payload = EMPTY_HASH)
         return super(id, payload) if (id.is_a?(String) || id.is_a?(Symbol)) && !id.empty?
 
-        raise InvalidEventNameError.new
+        raise InvalidEventNameError
       end
 
       # Initialize a new event

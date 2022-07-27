@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'concurrent/map'
+require "concurrent/map"
 
-require 'dry/core/class_attributes'
+require "dry/core/class_attributes"
 
-require 'dry/events/constants'
-require 'dry/events/event'
-require 'dry/events/bus'
-require 'dry/events/filter'
+require "dry/events/constants"
+require "dry/events/event"
+require "dry/events/bus"
+require "dry/events/filter"
 
 module Dry
   module Events
@@ -29,7 +29,7 @@ module Dry
         when String, Symbol
           super("you are trying to subscribe to an event: `#{object_or_event_id}` that has not been registered")
         else
-          super('you try use subscriber object that will never be executed')
+          super("you try use subscriber object that will never be executed")
         end
       end
     end
@@ -102,7 +102,7 @@ module Dry
       #
       # @api public
       def self.[](id)
-        raise PublisherAlreadyRegisteredError.new(id) if registry.key?(id)
+        raise PublisherAlreadyRegisteredError, id if registry.key?(id)
 
         new(id)
       end

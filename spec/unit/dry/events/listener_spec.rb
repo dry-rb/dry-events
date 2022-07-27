@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'dry/events/listener'
+require "dry/events/listener"
 
 RSpec.describe Dry::Events::Listener do
   subject(:listener) do
@@ -17,10 +17,10 @@ RSpec.describe Dry::Events::Listener do
     }.new
   end
 
-  describe '.subscribe' do
+  describe ".subscribe" do
     let(:captured) { [] }
 
-    it 'subscribes a listener at class level' do
+    it "subscribes a listener at class level" do
       listener.subscribe(:test_event) do |event|
         captured << event.id
       end
@@ -30,8 +30,8 @@ RSpec.describe Dry::Events::Listener do
       expect(captured).to eql([:test_event])
     end
 
-    describe 'filters' do
-      it 'filters events' do
+    describe "filters" do
+      it "filters events" do
         listener.subscribe(:test_event, level: :info) do |event|
           captured << event.payload
         end

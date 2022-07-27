@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'concurrent/map'
-require 'dry/core/constants'
+require "concurrent/map"
+require "dry/core/constants"
 
 module Dry
   module Events
