@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-require "concurrent/map"
-
-require "dry/core/class_attributes"
-
+require "dry/core"
 require "dry/events/constants"
 require "dry/events/event"
 require "dry/events/bus"
