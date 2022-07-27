@@ -27,7 +27,10 @@ module Dry
       def initialize(object_or_event_id)
         case object_or_event_id
         when String, Symbol
-          super("you are trying to subscribe to an event: `#{object_or_event_id}` that has not been registered")
+          super(
+            "you are trying to subscribe to an event: `#{object_or_event_id}` "\
+            "that has not been registered"
+          )
         else
           super("you try use subscriber object that will never be executed")
         end
@@ -74,7 +77,7 @@ module Dry
     #   create_user.call(name: "Jane")
     #
     # @api public
-    class Publisher < Module
+    class Publisher < ::Module
       include Dry::Equalizer(:id)
 
       # Internal publisher registry, which is used to identify them globally
@@ -109,6 +112,7 @@ module Dry
 
       # @api private
       def initialize(id)
+        super()
         @id = id
       end
 

@@ -23,7 +23,7 @@ module Dry
     #   end
     #
     # @api public
-    class Listener < Module
+    class Listener < ::Module
       include Dry::Equalizer(:id)
 
       # @!attribute [r] :id
@@ -42,6 +42,7 @@ module Dry
 
       # @api private
       def initialize(id)
+        super()
         @id = id
 
         define_method(:subscribe) do |event_id, query = EMPTY_HASH, &block|
