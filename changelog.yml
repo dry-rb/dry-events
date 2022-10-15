@@ -1,18 +1,19 @@
 ---
-- version: unreleased
-  summary: 
-  date: 
+- version: 0.4.0
+  summary:
+  date: 2022-10-15
   fixed:
   - "`subscribed?` now detects instance method blocks too (via #15) (@guilherme-andrade)"
-  added: 
-  changed: 
+  added:
+  changed:
+  - "Use zeitwerk for auto-loading (@flash-gordon)"
 - version: 0.3.0
-  summary: 
+  summary:
   date: '2021-04-11'
   fixed:
   - 'Trying to publish an unregistered event raises a meaningful error now (issue
     #13 fixed via #14) (@landongrindheim)'
-  added: 
+  added:
   changed:
   - Dependency on dry-equalizer was changed to dry-core (@solnic)
 - version: 0.2.0
