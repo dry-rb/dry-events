@@ -1,4 +1,8 @@
 ---
+- version: 0.5.0
+  date: unreleased
+  changed:
+  - "This version depends on dry-core 1.0 (@flash-gordon)"
 - version: 0.4.0
   summary:
   date: 2022-10-15
