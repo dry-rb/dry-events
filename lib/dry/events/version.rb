@@ -2,6 +2,6 @@
 
 module Dry
   module Events
-    VERSION = "0.5.0"
+    VERSION = "1.0.0.rc1"
   end
 end
