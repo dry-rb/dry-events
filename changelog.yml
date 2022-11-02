@@ -1,8 +1,8 @@
 ---
-- version: 0.5.0
-  date: unreleased
+- version: 1.0.0
+  date:
   changed:
-  - "This version depends on dry-core 1.0 (@flash-gordon)"
+  - "This version is compatible with recently released dry-rb dependencies (@flash-gordon)"
 - version: 0.4.0
   summary:
   date: 2022-10-15
