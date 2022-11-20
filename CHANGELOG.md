@@ -3,6 +3,24 @@
 ## 1.0.0 2022-11-04
 
 
+### Fixed
+
+- Make listeners hash thread-safe (via #16) (@mensfeld)
+
+### Changed
+
+- This version is compatible with recently released dry-rb dependencies (@flash-gordon)
+- Bumped version to 1.0.0 (@solnic)
+
+[Compare v1.0.0...v1.0.0](https://github.com/dry-rb/dry-events/compare/v1.0.0...v1.0.0)
+
+## 1.0.0 2022-11-04
+
+
+### Fixed
+
+- Make listeners hash thread-safe (via #16) (@mensfeld)
+
 ### Changed
 
 - This version is compatible with recently released dry-rb dependencies (@flash-gordon)
