@@ -9,9 +9,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/dry-events.svg)][gem]
 [![CI Status](https://github.com/dry-rb/dry-events/workflows/ci/badge.svg)][actions]
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3170162485134ea3b778c7e20e180b26)][codacy]
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/3170162485134ea3b778c7e20e180b26)][codacy]
-[![Inline docs](http://inch-ci.org/github/dry-rb/dry-events.svg?branch=main)][inchpages]
 
 ## Links
 
