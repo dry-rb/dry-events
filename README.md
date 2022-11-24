@@ -1,19 +1,14 @@
 <!--- this file is synced from dry-rb/template-gem project -->
 [gem]: https://rubygems.org/gems/dry-events
 [actions]: https://github.com/dry-rb/dry-events/actions
-[codacy]: https://www.codacy.com/gh/dry-rb/dry-events
-[chat]: https://dry-rb.zulipchat.com
-[inchpages]: http://inch-ci.org/github/dry-rb/dry-events
 
-# dry-events [![Join the chat at https://dry-rb.zulipchat.com](https://img.shields.io/badge/dry--rb-join%20chat-%23346b7a.svg)][chat]
-
-[![Gem Version](https://badge.fury.io/rb/dry-events.svg)][gem]
-[![CI Status](https://github.com/dry-rb/dry-events/workflows/ci/badge.svg)][actions]
+# dry-events [![Gem Version](https://badge.fury.io/rb/dry-events.svg)][gem] [![CI Status](https://github.com/dry-rb/dry-events/workflows/ci/badge.svg)][actions]
 
 ## Links
 
 * [User documentation](https://dry-rb.org/gems/dry-events)
 * [API documentation](http://rubydoc.info/gems/dry-events)
+* [Forum](https://discourse.dry-rb.org)
 
 ## Supported Ruby versions
 
