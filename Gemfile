@@ -12,7 +12,3 @@ group :test do
   gem "rack"
 end
 
-group :tools do
-  gem "pry"
-  gem "pry-byebug", platform: :mri
-end
