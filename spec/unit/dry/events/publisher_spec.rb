@@ -111,6 +111,41 @@ RSpec.describe Dry::Events::Publisher do
     end
   end
 
+  describe "#unsubscribe" do
+    it "unsubscribes a listener" do
+      listener = Class.new do
+        attr_reader :captured
+
+        def initialize
+          @captured = []
+        end
+
+        def on_test_event(event)
+          captured << event[:message]
+        end
+      end.new
+
+      captured_by_block = []
+
+      publisher.subscribe(:test_event) do |event|
+        captured_by_block << event[:message]
+      end
+      publisher.subscribe(listener)
+
+      publisher.publish(:test_event, message: "it works")
+
+      expect(listener.captured).to eql(["it works"])
+      expect(captured_by_block).to eql(["it works"])
+
+      publisher.unsubscribe(listener)
+
+      publisher.publish(:test_event, message: "it works")
+
+      expect(listener.captured).to eql(["it works"])
+      expect(captured_by_block).to eql(["it works", "it works"])
+    end
+  end
+
   describe "#publish" do
     it "publishes an event" do
       result = []
