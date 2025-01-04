@@ -11,7 +11,7 @@ AllCops:
     - spec/support/warnings.rb
     - spec/support/rspec_options.rb
     - Gemfile.devtools
-    - "*.gemspec"
+     "*.gemspec"
 
 Layout/SpaceAroundMethodCallOperator:
   Enabled: false

@@ -4,10 +4,6 @@ gemspec:
   authors: ["Piotr Solnica"]
   email: ["piotr.solnica+oss@gmail.com"]
   summary: "Pub/sub system"
-  development_dependencies:
-    - bundler
-    - rake
-    - rspec
   runtime_dependencies:
     - [concurrent-ruby, "~> 1.0"]
-    - [dry-core, "~> 1.0", "< 2"]
+    - [dry-core, "~> 1.1"]
