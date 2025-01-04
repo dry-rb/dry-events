@@ -63,6 +63,8 @@ module Dry
         listeners.each do |id, memo|
           memo.each do |tuple|
             current_listener, _ = tuple
+            next unless current_listener.is_a?(Method)
+
             listeners[id].delete(tuple) if current_listener.receiver.equal?(listener)
           end
         end
