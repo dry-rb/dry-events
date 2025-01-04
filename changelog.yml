@@ -2,6 +2,8 @@
 - version: 1.1.0
   summary:
   date: 2025-01-04
+  fixed:
+  - "Calling `Publisher#unsubscribe` when there's a block subscription now works (via #17) (@Aerdayne)"
   changed:
   - 'Set minimum Ruby version to 3.1.0 (@flash-gordon)'
 - version: 1.0.1
