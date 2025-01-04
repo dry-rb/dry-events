@@ -11,7 +11,7 @@ module Dry
     #
     # @api private
     class Filter
-      NO_MATCH = Object.new.freeze
+      NO_MATCH = ::Object.new.freeze
 
       # @!attribute [r] events
       #   @return [Array] A list of lambdas checking payloads
@@ -39,7 +39,7 @@ module Dry
       #
       # @api private
       def build_checks(filter, checks = EMPTY_ARRAY, keys = EMPTY_ARRAY)
-        if filter.is_a?(Hash)
+        if filter.is_a?(::Hash)
           filter.reduce(checks) do |cs, (key, value)|
             build_checks(value, cs, [*keys, key])
           end
@@ -51,7 +51,7 @@ module Dry
       # @api private
       def compare(path, predicate, payload)
         value = path.reduce(payload) do |acc, key|
-          if acc.is_a?(Hash) && acc.key?(key)
+          if acc.is_a?(::Hash) && acc.key?(key)
             acc[key]
           else
             break NO_MATCH
@@ -64,8 +64,8 @@ module Dry
       # @api private
       def predicate(value)
         case value
-        when Proc then value
-        when Array then value.method(:include?)
+        when ::Proc then value
+        when ::Array then value.method(:include?)
         else value.method(:==)
         end
       end

@@ -11,7 +11,7 @@ module Dry
     # Exception raised when the same publisher is registered more than once
     #
     # @api public
-    PublisherAlreadyRegisteredError = Class.new(StandardError) do
+    PublisherAlreadyRegisteredError = ::Class.new(::StandardError) do
       # @api private
       def initialize(id)
         super("publisher with id #{id.inspect} already registered as: #{Publisher.registry[id]}")
@@ -19,13 +19,13 @@ module Dry
     end
 
     # @api public
-    InvalidSubscriberError = Class.new(StandardError) do
+    InvalidSubscriberError = ::Class.new(::StandardError) do
       # @api private
       def initialize(object_or_event_id)
         case object_or_event_id
-        when String, Symbol
+        when ::String, ::Symbol
           super(
-            "you are trying to subscribe to an event: `#{object_or_event_id}` "\
+            "you are trying to subscribe to an event: `#{object_or_event_id}` " \
             "that has not been registered"
           )
         else
@@ -34,10 +34,10 @@ module Dry
       end
     end
 
-    UnregisteredEventError = Class.new(StandardError) do
+    UnregisteredEventError = ::Class.new(::StandardError) do
       def initialize(object_or_event_id)
         case object_or_event_id
-        when String, Symbol
+        when ::String, ::Symbol
           super("You are trying to publish an unregistered event: `#{object_or_event_id}`")
         else
           super("You are trying to publish an unregistered event")
@@ -75,7 +75,7 @@ module Dry
     #
     # @api public
     class Publisher < ::Module
-      include Dry::Equalizer(:id)
+      include ::Dry::Equalizer(:id)
 
       # Internal publisher registry, which is used to identify them globally
       #
@@ -84,7 +84,7 @@ module Dry
       #
       # @api private
       def self.registry
-        @__registry__ ||= Concurrent::Map.new
+        @__registry__ ||= ::Concurrent::Map.new
       end
 
       # @!attribute [r] :id
@@ -168,7 +168,7 @@ module Dry
         #
         # @api private
         def events
-          @__events__ ||= Concurrent::Map.new
+          @__events__ ||= ::Concurrent::Map.new
         end
 
         # Global registry with listeners
@@ -265,8 +265,8 @@ module Dry
         # param [Hash] payload An optional payload
         #
         # @api public
-        def process(event_id, payload = EMPTY_HASH, &block)
-          __bus__.process(event_id, payload, &block)
+        def process(event_id, payload = EMPTY_HASH, &)
+          __bus__.process(event_id, payload, &)
         end
 
         # Internal event bus

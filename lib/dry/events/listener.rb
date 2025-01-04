@@ -23,7 +23,7 @@ module Dry
     #
     # @api public
     class Listener < ::Module
-      include Dry::Equalizer(:id)
+      include ::Dry::Equalizer(:id)
 
       # @!attribute [r] :id
       #   @return [Symbol,String] The publisher identifier

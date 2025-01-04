@@ -8,9 +8,9 @@ module Dry
     #
     # @api public
     class Event
-      include Dry::Equalizer(:id, :payload)
+      include ::Dry::Equalizer(:id, :payload)
 
-      InvalidEventNameError = Class.new(StandardError) do
+      InvalidEventNameError = ::Class.new(::StandardError) do
         # @api private
         def initialize
           super("please provide a valid event name, it could be either String or Symbol")
@@ -26,7 +26,7 @@ module Dry
 
       # @api private
       def self.new(id, payload = EMPTY_HASH)
-        return super(id, payload) if (id.is_a?(String) || id.is_a?(Symbol)) && !id.empty?
+        return super if (id.is_a?(::String) || id.is_a?(::Symbol)) && !id.empty?
 
         raise InvalidEventNameError
       end

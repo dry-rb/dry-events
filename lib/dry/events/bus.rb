@@ -79,8 +79,8 @@ module Dry
         listeners.values.any? do |value|
           value.any? do |block, _|
             case listener
-            when Proc   then block.equal?(listener)
-            when Method then listener.owner == block.owner && listener.name == block.name
+            when ::Proc   then block.equal?(listener)
+            when ::Method then listener.owner == block.owner && listener.name == block.name
             end
           end
         end
@@ -89,7 +89,7 @@ module Dry
       # @api private
       def can_handle?(object_or_event_id)
         case object_or_event_id
-        when String, Symbol
+        when ::String, ::Symbol
           events.key?(object_or_event_id)
         else
           events
