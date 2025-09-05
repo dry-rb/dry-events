@@ -1,0 +1,17 @@
+name:
+  gem: dry-events
+  constant: Dry::Events
+github_org: dry-rb
+gemspec:
+  authors: ["Hanakai team"]
+  email: ["info@hanakai.org"]
+  summary: "Pub/sub system"
+  homepage: "https://dry-rb.org/gems/dry-events"
+  required_ruby_version: ">= 3.1.0"
+  development_dependencies:
+    - bundler
+    - rake
+    - rspec
+  runtime_dependencies:
+    - [concurrent-ruby, "~> 1.0"]
+    - [dry-core, "~> 1.1"]
