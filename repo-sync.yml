@@ -7,7 +7,6 @@ gemspec:
   email: ["info@hanakai.org"]
   summary: "Pub/sub system"
   homepage: "https://dry-rb.org/gems/dry-events"
-  required_ruby_version: ">= 3.1.0"
   development_dependencies:
     - bundler
     - rake
