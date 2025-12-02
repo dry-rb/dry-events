@@ -5,7 +5,8 @@ require_relative "support/coverage"
 begin
   require "pry"
   require "pry-byebug"
-rescue LoadError; end
+rescue LoadError;
+end
 require "dry-events"
 
 SPEC_ROOT = Pathname(__dir__)
