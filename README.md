@@ -2,7 +2,7 @@
 
 [actions]: https://github.com/dry-rb/dry-events/actions
 [chat]: https://discord.gg/naQApPAsZB
-[forum]: https://discourse.hanamirb.org
+[forum]: https://discourse.hanakai.org
 [rubygem]: https://rubygems.org/gems/dry-events
 
 # dry-events [![Gem Version](https://badge.fury.io/rb/dry-events.svg)][rubygem] [![CI Status](https://github.com/dry-rb/dry-events/workflows/CI/badge.svg)][actions]
